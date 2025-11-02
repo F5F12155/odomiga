@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Odomiga-Yé Immobilier - Suivi Client</title>
+    <link rel="prev" href="projets.html">
+    <meta name="description" content="Achat/vente de terrains et maisons, construction, rénovation et lotissement près d'Abidjan. Suivi client et gestion de leads." />
+
+    <style>
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --grey-dark: #333333;
+            --grey-light: #f5f5f5;
+            --red-accent: #C51D34;
+            --muted: #aaa;
+            --border-radius: 8px;
+            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Playfair Display', serif;
+            --shadow: rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--grey-light);
+            padding-top: 80px; /* Pour compenser le header fixe */
+            color: var(--black);
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            color: var(--red-accent);
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            color: var(--red-accent);
+            margin-top: 0;
+        }
+
+        p {
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        section.card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px var(--shadow);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        form {
+            display: grid;
+            grid-gap: 16px;
+        }
+
+        form label {
+            font-weight: bold;
+            color: var(--grey-dark);
+            margin-bottom: 8px;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            padding: 10px;
+            border: 1px solid var(--grey-dark);
+            border-radius: var(--border-radius);
+            width: 100%;
+            font-size: 1rem;
+            background-color: var(--white);
+            box-sizing: border-box;
+            margin-bottom: 16px;
+            transition: 0.3s ease;
+        }
+
+        form input:focus,
+        form select:focus,
+        form textarea:focus {
+            border-color: var(--red-accent);
+            outline: none;
+        }
+
+        form button {
+            padding: 12px;
+            background-color: var(--red-accent);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #a61c2f;
+        }
+
+        #leadsList {
+            margin-top: 20px;
+        }
+
+        #leadsList .card {
+            padding: 12px;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 6px var(--shadow);
+            margin-bottom: 10px;
+        }
+
+        #leadsList button {
+            background-color: var(--red-accent);
+            color: var(--white);
+            border: none;
+            padding: 8px;
+            font-size: 0.9rem;
+            margin-right: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #leadsList button:hover {
+            background-color: #a61c2f;
+        }
+
+        #leadsList button:last-child {
+            background-color: #ffdede;
+            color: #900;
+        }
+
+        #leadsList button:last-child:hover {
+            background-color: #f5c6cb;
+        }
+
+        .card {
+            padding: 16px;
+            background-color: var(--white);
+            box-shadow: 0 4px 12px var(--shadow);
+            border-radius: var(--border-radius);
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 16px;
+            background-color: var(--red-accent);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #a61c2f;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        /* Responsive: ajustement pour les petits écrans */
+        @media (max-width: 768px) {
+            #suivi div {
+                grid-template-columns: 1fr; /* 1 colonne pour les petits écrans */
+            }
+
+            #suivi form {
+                margin-bottom: 20px;
+            }
+
+            #leadsList {
+                margin-top: 10px;
+            }
+
+            button {
+                width: 100%; /* Pour les petits écrans, les boutons occuperont toute la largeur */
+            }
+        }
+
+        footer {
+            background-color: var(--grey-dark);
+            color: var(--grey-light);
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        footer .container div {
+            flex: 1;
+        }
+
+        footer a {
+            color: var(--red-accent);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+
+         :root {
+  --black: #000000;
+  --grey-dark: #333333;
+  --grey-light: #f5f5f5;
+  --white: #ffffff;
+  --red-accent: #C51D34;
+  --overlay: rgba(0,0,0,0.5);
+  --shadow: rgba(0,0,0,0.3);
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body { 
+  font-family: var(--font-body); 
+  overflow-x: hidden; 
+  position: relative; 
+  background: var(--grey-light); 
+}
+
+/* Filigrane logo répété sur toute la page */
+body::before {
+  content: "";
+  position: fixed;
+  top: 10;
+  left: 10;
+  width: 10%;
+  height: 10%;
+  background-image: url('logo ODOMIGAYé.jpg');
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  opacity: 100; /* ajustable pour visibilité */
+  pointer-events: none;
+  z-index: -1;
+  mix-blend-mode: lighten;
+}
+
+    /* Header */
+    header {
+      position: fixed; top:0; left:0; width:100%;
+      display:flex; flex-direction: column; align-items:center;
+      background: var(--black); padding:15px 30px; z-index:1000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    header img {
+      height:90px; border-radius: 15px;
+      box-shadow: 0 4px 12px var(--shadow);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      cursor: pointer;
+    }
+
+    header img:hover {
+      transform: scale(1.15) rotate(-5deg);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    nav { display: flex; gap:20px; flex-wrap: wrap; justify-content:center; margin-top:10px; }
+    nav a { color: var(--white); text-decoration:none; font-weight:600; padding:8px 15px; border-radius:6px; transition:0.3s; }
+    nav a:hover { color: var(--red-accent); background: rgba(255,255,255,0.1); }
+    nav a.btn { background: var(--red-accent); color: var(--white); font-weight:700; }
+
+    /* Bandeau défilant */
+    .scroll-message {
+      width: 100%; overflow: hidden;
+      background: var(--red-accent); color: var(--white);
+      white-space: nowrap; box-sizing: border-box; padding:5px 0;
+      font-weight:600; font-size:1rem;
+    }
+    .scroll-message span {
+      display: inline-block; padding-left:100%;
+      animation: scrollText 50s linear infinite;
+    }
+    @keyframes scrollText {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Prestations */
+    .prestations { background: var(--white); color: var(--black); padding:120px 20px 80px 20px; text-align:center; }
+    .prestations h2 { font-family: var(--font-heading); font-size:2.5rem; margin-bottom:50px; color: var(--red-accent); }
+    .prestations .services { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px; }
+    .prestations .service {
+      padding:25px; border-radius:12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s;
+      background: #fff;
+    }
+    .prestations .service:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+    .prestations .service h3 { font-size:1.8rem; margin-bottom:10px; color: var(--red-accent); }
+    .prestations .service p { font-size:1rem; line-height:1.6; }
+    .prestations ul { text-align:left; max-width:800px; margin:20px auto 0; list-style: disc; padding-left:20px; }
+
+    /* Footer */
+    footer { background: var(--grey-dark); color: var(--grey-light); text-align:center; padding:40px 20px; }
+    footer a { color: var(--red-accent); text-decoration:none; margin:0 10px; }
+    footer a:hover { text-decoration:underline; }
+
+    /* Responsive */
+    @media(max-width:768px){
+      header img { height:70px; }
+      .prestations h2 { font-size:2rem; }
+      .prestations .service h3 { font-size:1.4rem; }
+      .prestations .service p { font-size:0.9rem; }
+    }
+
+    /* Bandeau haut logo + texte défilant */
+    .top-banner {
+      position: fixed; top:0; left:0; width:100%;
+      background: var(--red-accent);
+      color: var(--white);
+      display: flex; align-items: center;
+      padding: 10px 20px; z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      font-weight: 600; overflow: hidden;
+    }
+    .banner-logo img { height: 60px; border-radius: 10px; margin-right:20px; }
+    .banner-text-wrapper { overflow: hidden; flex:10; }
+    .banner-text { display: flex; gap:50px; white-space: nowrap; animation: scrollBanner 40s linear infinite; }
+    .banner-text span { display: inline-block; }
+    @keyframes scrollBanner { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+    /* Bandeau logos défilants */
+    .logo-banner { width:100%; overflow:hidden; background: var(--white); padding:10px 0; }
+    .logo-track { display:flex; gap:50px; animation: scrollLogo 20s linear infinite; }
+    .logo-track img { height:60px; border-radius:10px; }
+    @keyframes scrollLogo { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.gallery-item {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.gallery-item img,
+.gallery-item video {
+  width: 100%;
+  aspect-ratio: 16/9; /* Permet une hauteur automatique adaptée à l’écran */
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-item p {
+  padding: 10px;
+  text-align: center;
+  color: #555;
+  margin: 0;
+  font-size: 0.95rem;
+}
+    </style>
+</head>
+
+<body>
+ <header>
+    <img src="" alt="Logo OdomigaYé">
+    <div class="scroll-message">
+      <span>Bienvenue chez OdomigaYé Immobilier – Achat & Vente, Construction, Rénovation, Gestion locative, Lotissement, siège au Carrefour Faya Rivière 3, Tel: 07 47 01 37 06, odomigayeimmobilier@gmail.com</span>
+    </div>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="prestations.html">Prestations</a>
+      <a href="projets.html">Projets & Galerie</a>
+      <a href="suivis.html">espaces client</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn" href="https://wa.me/2250747013706" target="_blank">WhatsApp</a>
+    </nav>
+  </header>
+
+  <!-- Bandeau haut -->
+  <div class="top-banner">
+    <div class="banner-logo"><img src="logo ODOMIGAYé.jpg" alt="Logo OdomigaYé"></div>
+    <div class="banner-text-wrapper">
+      <div class="banner-text">
+        <span>Petit à petit, l’oiseau fait son nid → Commencez dès aujourd’hui votre propre nid en investissant dans un terrain avec OdomigaYé Immobilier.</span>
+        <span>Qui veut aller loin ménage sa monture → Investir dans la bonne parcelle, c’est sécuriser votre futur.</span>
+        <span>On ne vend pas l’arbre avant que les fruits soient mûrs → Achetez votre terrain maintenant et récoltez les fruits de demain.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bandeau logos -->
+  <section class="logo-banner">
+    <div class="logo-track">
+      <img src="logo ODOMIGAYé.jpg" alt="Logo OdomigaYé">
+      <img src="logo ODOMIGAYé.jpg" alt="Logo OdomigaYé">
+      <img src="logo ODOMIGAYé.jpg" alt="Logo OdomigaYé">
+      <img src="logo ODOMIGAYé.jpg" alt="Logo OdomigaYé">
+    </div>
+  </section>
+    <!-- Suivi client (CRM simplifié) -->
+    <section id="suivi" class="card" style="margin-top:20px">
+        <h2>Suivi client & gestion des contacts</h2>
+        <p>Enregistrer un lead, suivre l'avancement du dossier, ajouter des notes et planifier des rappels — tout depuis le navigateur.</p>
+
+        <div style="display:grid; grid-template-columns:1fr 380px; gap:16px">
+            <!-- Formulaire leads -->
+            <div>
+                <form id="leadForm" onsubmit="saveLead(event)">
+                    <label>Nom complet</label>
+                    <input name="nom" required>
+
+                    <label>Téléphone</label>
+                    <input name="tel" required>
+
+                    <label>Email (optionnel)</label>
+                    <input name="email">
+
+                    <label>Service intéressé</label>
+                    <select name="service">
+                        <option>Achat & Vente</option>
+                        <option>Construction</option>
+                        <option>Rénovation</option>
+                        <option>Lotissement</option>
+                        <option>Gestion locative</option>
+                    </select>
+
+                    <label>Commentaire / Détails</label>
+                    <textarea name="note" rows="4"></textarea>
+
+                    <button type="submit">Enregistrer le lead</button>
+                </form>
+
+                <div style="margin-top:14px">
+                    <h4>Liste des leads (local)</h4>
+                    <div id="leadsList"></div>
+                </div>
+            </div>
+
+            <!-- Actions rapides -->
+            <div>
+                <div class="card">
+                    <h4 style="margin-top:0">Actions rapides</h4>
+                    <button onclick="exportLeads()" style="width:100%; padding:10px; margin-top:8px">Exporter (CSV)</button>
+                    <button onclick="clearLeads()" style="width:100%; padding:10px; margin-top:8px; background:#ffdede; color:#900">Supprimer tout</button>
+                    <p style="margin-top:8px; color:var(--muted)">
+                        Les leads sont sauvegardés localement dans votre navigateur (localStorage). Pour un CRM complet, on peut intégrer un backend ou Google Sheets.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <script>
+        // --- Gestion leads localStorage ---
+        function getLeads() {
+            return JSON.parse(localStorage.getItem('odomiga yé') || '[]');
+        }
+        function saveLeads(list) {
+            localStorage.setItem('odomiga yé', JSON.stringify(list));
+            renderLeads();
+        }
+        function saveLead(e) {
+            e.preventDefault();
+            const f = new FormData(e.target);
+            const lead = {
+                id: Date.now(),
+                nom: f.get('nom'),
+                tel: f.get('tel'),
+                email: f.get('email') || '',
+                service: f.get('service'),
+                note: f.get('note'),
+                status: 'Nouveau'
+            };
+            const list = getLeads();
+            list.unshift(lead);
+        </script>

@@ -1,319 +1,345 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Odomiga-Yé — Immobilier </title>
-  <meta name="description" content="  Achat/vente de terrains et maisons, construction, rénovation et lotissement près d'Abidjan. Suivi client et gestion de leads." />
-  <style>
-    :root{--primary:#0b8793;--accent:#0f3d73;--muted:#6b7280;--card:#ffffff;--bg:#f4f7fb}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:#102a43;background:var(--bg)}
-    header{background:linear-gradient(90deg,var(--accent),#1a6b8a);color:#fff;padding:20px 16px;text-align:center}
-    header img{height:64px;object-fit:contain}
-    .container{width:min(1200px,94%);margin:0 auto}
-    nav{display:flex;gap:12px;justify-content:center;align-items:center;padding:12px;background:#fff;border-bottom:1px solid #e6eef5}
-    nav a{color:var(--accent);text-decoration:none;font-weight:600}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:24px;padding:48px 0;align-items:center}
-    .hero-left h1{font-size:clamp(1.6rem,3vw,2.6rem);margin:0 0 .4rem}
-    .hero-left p{color:var(--muted);margin:0 0 1rem}
-    .cta{display:flex;gap:.8rem}
-    .btn{background:var(--primary);color: #FFF;;padding:.8rem 1rem;border-radius:10px;border:none;font-weight:700;text-decoration:none}
-    .btn.ghost{background:#fff;color:var(--accent);border:1px solid #e6eef5}
-    .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 8px 30px rgba(16,42,67,0.06)}
-    .services{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
-    .service{padding:14px;border-radius:10px;border:1px solid #e6eef5;background:#3333}
-    h2{color:var(--accent);margin:0 0 12px}
-    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .gallery img{width:100%;height:200px;object-fit:cover;border-radius:8px}
-    .tabs{display:flex;gap:8px;border-bottom:3px solid var(--primary);margin-bottom:12px}
-    .tab{padding:8px 14px;border-radius:8px;cursor:pointer;background:transparent}
-    .tab.active{background:var(--primary);color:#ffffff}
-    .tab-content{display:none}
-    .tab-content.active{display:block}
-    form input,form textarea,select{width:100%;padding:10px;border:1px solid #cfdde6;border-radius:8px;margin-top:8px}
-    form button{margin-top:10px;padding:10px 12px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-weight:700}
-    footer{background:#071827;color:#9fb0c6;padding:20px;margin-top:28px}
-    @media (max-width:1000px){.hero{grid-template-columns:1fr}}
-    @media (max-width:720px){.services{grid-template-columns:repeat(2,1fr)}.gallery{grid-template-columns:1fr}}
-  </style>
- 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OdomigaYé Immobilier</title>
+<link rel="icon" href="logo-ODOMIGAYe.png" type="image/png">
+<link rel="next" href="prestations.html">
+<style>
+:root {
+  --black: #000000;
+  --grey-dark: #333333;
+  --grey-light: #f5f5f5;
+  --white: #ffffff;
+  --red-accent: #C51D34;
+  --overlay: rgba(0,0,0,0.5);
+  --shadow: rgba(0,0,0,0.3);
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body { 
+  font-family: var(--font-body); 
+  overflow-x: hidden; 
+  position: relative; 
+  background: var(--grey-light); 
+}
+
+/* Filigrane logo répété sur toute la page */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('logo ODOMIGAYé.jpg');
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  opacity: 100; /* ajustable pour visibilité */
+  pointer-events: none;
+  z-index: -1;
+  mix-blend-mode: lighten;
+}
+
+/* Header */
+header {
+  position: fixed; top:0; left:0; width:100%;
+  display:flex; flex-direction: column; align-items:center;
+  background: var(--black); padding:15px 30px; z-index:1000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+header img {
+  height:90px; border-radius: 15px;
+  box-shadow: 0 4px 12px var(--shadow);
+  animation: logoPulse 2s infinite alternate;
+}
+@keyframes logoPulse { 0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);} }
+
+nav { display: flex; gap:20px; flex-wrap: wrap; justify-content:center; margin-top:10px; }
+nav a { color: var(--white); text-decoration:none; font-weight:600; padding:8px 15px; border-radius:6px; transition:0.3s; }
+nav a:hover { color: var(--red-accent); background: rgba(255,255,255,0.1); }
+nav a.btn { background: var(--red-accent); color: var(--white); font-weight:700; }
+
+/* Bandeau défilant */
+.scroll-message {
+  width: 100%; overflow: hidden;
+  background: var(--red-accent); color: var(--white);
+  white-space: nowrap; box-sizing: border-box; padding:5px 0;
+  font-weight:600; font-size:1rem;
+}
+.scroll-message span {
+  display: inline-block; padding-left:100%;
+  animation: scrollText 50s linear infinite;
+}
+@keyframes scrollText {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Slider */
+.slider { position: relative; width: 100vw; height: 90vh; overflow: hidden; margin-top:0; }
+.slide {
+  position: absolute; width: 100%; height: 100%; background-size: cover; background-position: center;
+  opacity: 0; transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
+}
+.slide.active { opacity: 1; transform: scale(1); z-index:2; }
+.slide::before { content:""; position:absolute; width:100%; height:100%; background: var(--overlay); z-index:1; }
+
+.slide-content {
+  position: relative; z-index:2; text-align:center; color: var(--white);
+  top:50%; transform: translateY(-50%);
+  width: 100%; padding: 0 20px;
+}
+.slide-content h2 { font-family: var(--font-heading); font-size:3rem; margin-bottom:20px; text-shadow:2px 2px 8px var(--shadow); }
+.slide-content p { font-size:1.3rem; line-height:1.6; text-shadow:1px 1px 6px var(--shadow); }
+
+/* Slider buttons */
+.slider-btn {
+  position:absolute; top:50%; transform: translateY(-50%);
+  background: rgba(0,0,0,0.6); border:none; color: var(--white); font-size:2rem;
+  padding:12px; cursor:pointer; border-radius:50%; z-index:5; transition:0.3s;
+}
+.slider-btn:hover { background: var(--red-accent); transform: translateY(-50%) scale(1.1); }
+.prev { left:30px; } .next { right:30px; }
+
+/* Prestations */
+.prestations { background: var(--white); color: var(--black); padding:80px 20px; text-align:center; }
+.prestations h2 { font-family: var(--font-heading); font-size:2.5rem; margin-bottom:50px; color: var(--red-accent); }
+.prestations .item {
+  margin-bottom:30px; padding:25px; border-radius:12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s;
+  background: #fff;
+}
+.prestations .item:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+.prestations .item h3 { font-size:1.8rem; margin-bottom:10px; color: var(--red-accent); }
+.prestations .item p { font-size:1rem; line-height:1.6; }
+
+/* Footer */
+footer { background: var(--grey-dark); color: var(--grey-light); text-align:center; padding:40px 20px; }
+footer a { color: var(--red-accent); text-decoration:none; margin:0 10px; }
+footer a:hover { text-decoration:underline; }
+
+/* Responsive */
+@media(max-width:768px){
+  header img { height:70px; }
+  .slide-content h2 { font-size:2rem; }
+  .slide-content p { font-size:1rem; }
+  nav { gap:10px; }
+  .prestations h2 { font-size:2rem; }
+  .prestations .item h3 { font-size:1.4rem; }
+  .prestations .item p { font-size:0.5rem; }
+}
+header img {
+  height: 90px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px var(--shadow);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  cursor: pointer;
+}
+
+header img:hover {
+  transform: scale(1.15) rotate(-5deg);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+
+/* Bandeau en haut avec logo à gauche et texte à droite */
+.top-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--red-accent);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  font-weight: 600;
+  overflow: hidden;
+}
+
+/* Logo */
+.banner-logo img {
+  height: 60px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  flex-shrink: 0;
+  margin-right: 20px;
+}
+
+/* Wrapper du texte pour que le logo reste visible */
+.banner-text-wrapper {
+  overflow: hidden;
+  flex: 10;
+}
+
+/* Texte défilant lentement */
+.banner-text {
+  display: flex;
+  gap: 50px;
+  white-space: nowrap;
+  animation: scrollBanner 40s linear infinite; /* plus lent */
+}
+
+.banner-text span {
+  display: inline-block;
+}
+
+/* Animation */
+@keyframes scrollBanner {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .banner-logo img { height: 50px; }
+  .top-banner { padding: 8px 15px; font-size: 0.9rem; }
+}
+
+
+.logo-banner {
+  width: 100%;
+  overflow: hidden;
+  background: var(--white);
+  padding: 10px 0;
+}
+
+.logo-track {
+  display: flex;
+  gap: 50px;
+  animation: scrollLogo 20s linear infinite;
+}
+
+.logo-track img {
+  height: 60px; /* taille du logo */
+  border-radius: 10px;
+}
+
+@keyframes scrollLogo {
+  2% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* défilement vers la gauche */
+}
+
+
+</style>
 </head>
+
 <body>
-  <header>
-    <div class="container" style="display:flex;align-items:center;gap:40px;justify-content:center;flex-wrap:wrap">
-      <img src="logo ODOMIGAYé.jpg" alt="Logo Odomiga-Yé Immobilier" onerror="this.style.display='none'">
-      <div style="text-align:center">
-        <div style="font-weight:800;font-size:1.15rem">OdomigaYé Imobillier</div>
-        <div style="font-size:.9rem;color:rgb(255, 255, 255)">Achat et vente de Terrain et maison  • Construction et rénovation • Lotissement  • gestion locative • location / vente de maisons </div>
-      </div>
-    </div>
-  </header>
-
-  <nav class="container">
-    <a href="#prestations">Prestations</a>
-    <a href="#projets">Projets & gallerie</a>
-    <a href="#suivi">Suivi client</a>
-    <a href="#contact">Contact</a>
+<header>
+  <img src="" alt="Logo OdomigaYé">
+  <div class="scroll-message"><span>Bienvenue chez OdomigaYé Immobilier – Achat & Vente, Construction, Rénovation, Gestion locative, Lotissement, siège au Carrefour Faya Rivière 3,Tel: 07 47 01 37 06,odomigayeimmobilier@gmail.com </span></div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="prestations.html">Prestations</a>
+    <a href="projets.html">Projets & Galerie</a>
+    <a href="suivis.html">espaces client</a>
+    <a href="contact.html">Contact</a>
+    <a class="btn" href="https://wa.me/2250747013706" target="_blank">WhatsApp</a>
   </nav>
-  <main class="container">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-left">
-        <h1>Odomiga-Yé Immobilier — Votre patrimoine immobilier, notre priorité !</h1>
-        <p>Devenir propriétaire et réaliser son rêve partout en Côte d'voire ! C'est désormais possible avec #Odomiga-Yé Immobilier.
-Plusieurs lots de 500 m2 dont 6 en bordure de voie en pleine ville à Yakassé Attobrou. Chef lieu de Commune, de Sous-préfecture et de Département, située à 25 km d'Azopé et 103 km d'Abidjan.</p>
-        <div class="cta">
-          <a class="btn" href="#prestations">Découvrir nos prestation </a>
-          <a class="btn ghost" href="#projets">Projets & gallerie</a>
-          <a class="btn ghost" href="#suivi">Suivi client</a>
-        </div>
+</header>
 
-        <div style="margin-top:18px;display:flex;gap:8px;flex-wrap:wrap">
-          <div class="card" style="min-width:180px">Prix à partir de <div style="font-weight:800;font-size:1.1rem;margin-top:6px">600 000 FCFA</div></div>
-          <div class="card" style="min-width:240px">Contact rapide <div style="margin-top:6px;font-weight:700">07 47 01 37 06 — WhatsApp</div></div>
-        </div>
-      </div>
+<div class="logo-banner">
+  <div class="logo-track">
+    <img src="logo ODOMIGAYé.jpg" alt="Logo OdomigaYé">
+    <img src="logo ODOMIGAYé.jpg" alt="Logo OdomigaYé">
+    <img src="logo ODOMIGAYé.jpg" alt="Logo OdomigaYé">
+    <!-- Duplique l'image autant de fois que nécessaire pour un effet continu -->
+  </div>
+</div>
 
-      <aside>
-        <div class="card">
-          <h3 style="margin-top:0">Recherche rapide</h3>
-          <form id="quickSearch" onsubmit="quickSearch(event)">
-            <select name="type" required>
-              <option value="">Type (Terrain / Maison)</option>
-              <option>Terrain</option>
-              <option>Maison</option>
-            </select>
-            <input name="ville" placeholder="Ville / Zone (ex: Adzopé)" required>
-            <input type="number" name="min" placeholder="Budget min (FCFA)">
-            <input type="number" name="max" placeholder="Budget max (FCFA)">
-            <button type="submit">Rechercher</button>
-          </form>
-        </div>
 
-        <div style="height:18px"></div>
-
-        <div class="card">
-          <h4 style="margin:0 0 8px">Contact</h4>
-          <p style="margin:0">Carrefour Faya, Abidjan</p>
-          <p style="margin:6px 0 0"><strong>Tel:</strong> 07 47 01 37 06</p>
-          <p style="margin:6px 0 0"><strong>Email:</strong> odomigayeimmobilier@gmail.com</p>
-          <p></p>
-
-          <a class="btn" href="https://wa.me/2250747013706" target="_blank" rel="noreferrer">WhatsApp</a>
-        </div>
-      </aside>
-    </section>
-
-    <!-- Prestations -->
-    <section id="prestations" class="card" style="margin-top:20px">
-      <h2>Nos prestations</h2>
-
-      <div class="services">
-        <div class="service">
-          <h3>Achat & Vente</h3>
-          <p>Accompagnement complet pour l'achat et la vente de terrains et maisons : vérification des titres, estimation, mise en valeur, négociation.</p>
-          <p style="margin-top:8px;font-weight:700">Zones: Mohamé, Aboisso, Adzopé, Boudépé, Yakassé-Attobrou...</p>
-        </div>
-        <div class="service">
-          <h3>Construction</h3>
-          <p>Construction clé en main, suivi chantier, livraisons conformes : du RDC à R+6, partenaires qualifiés.</p>
-        </div>
-        <div class="service">
-          <h3>Rénovation</h3>
-          <p>Rénovation intérieure et extérieure, optimisation des espaces, modernisation et finitions haut de gamme.</p>
-        </div>
-        <div class="service">
-          <h3>Lotissement</h3>
-          <p>Études, viabilisation, bornage et commercialisation de parcelles à moins de 100 km d'Abidjan.</p>
-        </div>
-        <div class="service">
-          <h3>gestion locative</h3>
-          <p>Grâce à l'intervention d'un commissaire de justice, votre gestion locative sera pleinement sécurisée</p>
-        </div> 
-      </div>
-
-      <div style="margin-top:18px">
-        <h3>Points forts</h3>
-        <ul>
-          <li>Accompagnement juridique et administratif</li>
-           <li>Odomiga-yé pratique le foncier épargne</li>
-          <li>Réseau local d'acteurs (Gomon, Sikensi, Bécédi-Brignan...)</li>
-          <li>Suivi client personnalisé (CRM simplifié intégré au site)</li>
-          <li>Garantie qualité et conformité des travaux</li>
-          
-        </ul>
-      </div>
-    </section>
-   <!-- Projets & Galerie -->
-    <section id="projets" class="card" style="margin-top:20px">
-      <h2>Projets & Galeries de Odomiga-Yé Immobilier</h2>
-      <p>Exemples de sites en vente et lotissements récents — cliquez pour agrandir.</p>
-      <div class="gallery" role="list">
-        <img src="" alt="Lotissement Mohamé" role="listitem">
-        <img src="" alt="Parcelle Adzopé" role="listitem">
-        <img src="" alt="Chantier en cours" role="listitem">
-
-  <div class="gallery-item" role="listitem" aria-label="Vidéo 1 : Présentation ODG">
-      <video width="300" height="360" controls>
-        <source src="ODG.mp4" type="video/mp4">
-      </video>
-      <p> Présentation  des locaux de Odomiga-Yé Immobilier </p>
+<div class="top-banner">
+  <div class="banner-logo">
+    <img src="logo ODOMIGAYé.jpg" alt="Logo OdomigaYé">
+  </div>
+  <div class="banner-text-wrapper">
+    <div class="banner-text">
+      <span>Petit à petit, l’oiseau fait son nid → Commencez dès aujourd’hui votre propre nid en investissant dans un terrain avec OdomigaYé Immobilier.</span>
+      <span>Qui veut aller loin ménage sa monture → Investir dans la bonne parcelle, c’est sécuriser votre futur.</span>
+      <span>On ne vend pas l’arbre avant que les fruits soient mûrs → Achetez votre terrain maintenant et récoltez les fruits de demain.</span>
     </div>
+  </div>
+</div>
 
-     <div class="gallery-item" role="listitem" aria-label="Vidéo 1 : Présentation ODG">
-      <video width="300" height="360" controls>
-        <source src="ODG VID2.mp4" type="video/mp4">
-      </video>
-      <p>Présentation Odomiga-Yé Immobilier</p>
+
+<div class="slider">
+  <div class="slide active" style="background-image:url('fond1.jpg');">
+    <div class="slide-content">
+      <h2>OdomigaYé Immobilier</h2>
+      <p>Achat & vente de terrains & maisons • Construction • Rénovation • Lotissement • Gestion locative</p>
     </div>
-
-    
-     <div class="gallery-item" role="listitem" aria-label="Vidéo 1 : Présentation ODG">
-      <video width="300" height="360" controls>
-        <source src="ODG vid 3 épargne immobilier .mp4" type="video/mp4">
-      </video>
-      <p>épargne foncier</p>
+  </div>
+  <div class="slide" style="background-image:url('fond2.jpg');">
+    <div class="slide-content">
+      <h2>Présentation de l'entreprise </h2>
+      <p>Créée en 2024, OdomigaYé Immobilier, SARL au capital de 1 000 000 F CFA, est une société ivoirienne spécialisée dans le lotissement, la vente de terrain, de maison, la rénovation et la gestion locative.</p>
+    <p>Son siège social est situé au carrefour faya,Abidjan</p>
     </div>
-
-    
-   
-
-    </section>
-
-    
-
-    <!-- Contact détaillé -->
-    <section id="contact" class="card" style="margin-top:20px">
-      <h2>Contactez Odomiga-Yé Immobilier</h2>
-      <p> Abidjan,Carrefour faya  </p>
-      <div style="display:grid;grid-template-columns:1fr 300px;gap:16px;margin-top:10px">
-        <div>
-          <form onsubmit="contactSend(event)">
-            <label>Nom</label>
-            <input name="name" required>
-            <label>Téléphone</label>
-            <input name="phone" required>
-            <label>Message</label>
-            <textarea name="message" rows="4" required></textarea>
-            <button type="submit">Envoyer via WhatsApp</button>
-          </form>
-        </div>
-        <aside class="card">
-          <p><strong>Téléphones :</strong><br>07 47 01 37 06 — 07 08 65 46 83 — 07 97 55 27 89</p>
-          <p><strong>Email :</strong><br>odomigayeimmobilier@gmail.com</p>
-          <p><strong>Horaires :</strong><br>Lundi–Vendredi 8h–17h</p>
-        </aside>
-      </div>
-    </section>
-<!-- Suivi client (CRM simplifié) -->
-    <section id="suivi" class="card" style="margin-top:20px">
-      <h2>Suivi client & gestion des contacts</h2>
-      <p>Enregistrer un lead, suivre l'avancement du dossier, ajouter des notes et planifier des rappels — tout depuis le navigateur.</p>
-
-      <div style="display:grid;grid-template-columns:1fr 380px;gap:16px">
-        <div>
-          <form id="leadForm" onsubmit="saveLead(event)">
-          <label>Nom complet</label>
-            <input name="nom" required>
-            <label>Téléphone</label>
-            <input name="tel" required>
-            <label>Email (optionnel)</label>
-            <input name="email">
-            <label>Service intéressé</label>
-            <select name="service">
-              <option>Achat & Vente</option>
-              <option>Construction</option>
-              <option>Rénovation</option>
-              <option>Lotissement</option>
-              <option>gestion locative</option>
-            </select>
-            <label>Commentaire / Détails</label>
-            <textarea name="note" rows="4"></textarea>
-            <button type="submit">Enregistrer le lead</button>
-          </form>
-
-          <div style="margin-top:14px">
-            <h4>Liste des leads (local)</h4>
-            <div id="leadsList"></div>
-          </div>
-        </div>
-
-        <div>
-          <div class="card">
-            <h4 style="margin-top:0">Actions rapides</h4>
-            <button onclick="exportLeads()" style="width:100%;padding:10px;margin-top:8px">Exporter (CSV)</button>
-            <button onclick="clearLeads()" style="width:100%;padding:10px;margin-top:8px;background:#ffdede;color:#900">Supprimer tout</button>
-            <p style="margin-top:8px;color:var(--muted)">Les leads sont sauvegardés localement dans votre navigateur (localStorage). Pour un CRM complet, on peut intégrer un backend ou Google Sheets.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-      <div>
-        <strong>Odomiga-Yé Immobilier</strong><br>
-        Achat et vente de Terrain et maison • Construction et rénovation • lotissement • gestion locative • location / vente de maisons
-      </div>
-      <div style="text-align:right">© 2025 Odomiga-Yé Immobilier — Tous droits réservés</div>
+  </div>
+  <div class="slide" style="background-image:url('fond3.jpg');">
+    <div class="slide-content">
+      <h2>Notre Vision</h2>
+      <p>Être un acteur majeur du développement immobilier en Côte d’Ivoire, en créant des espaces modernes, durables et accessibles.</p>
     </div>
-  </footer>
+  </div>
+  <div class="slide" style="background-image:url('fond4.jpg');">
+    <div class="slide-content">
+      <h2>Nos Atouts</h2>
+      <p>Équipe compétente • Opportunités foncières abordables • Stratégie durable respectueuse de l’environnement.</p>
+      <p><strong>Bonne Gestion locative</strong><br>Grâce à l'intervention d'un commissaire de justice, votre gestion locative sera pleinement sécurisée.</p>
+    </div>
+  </div>
+  <div class="slide" style="background-image:url('fond6.jpg');">
+    <div class="slide-content">
+      <h2>Nos Prestations</h2>
+      <p><strong>Achat & Vente</strong><br>Accompagnement complet pour l'achat et la vente de terrains et maisons : vérification des titres, estimation, mise en valeur, négociation.<br><em>Zones :</em> Mohamé, Aboisso, Adzopé, Boudépé, Yakassé-Attobrou...</p>
+      <p><strong>Construction</strong><br>Construction clé en main, suivi chantier, livraisons conformes : du RDC à R+6, partenaires qualifiés.</p>
+      <p><strong>Rénovation</strong><br>Rénovation intérieure et extérieure, optimisation des espaces, modernisation et finitions haut de gamme.</p>
+      <p><strong>Lotissement</strong><br>Études, viabilisation, bornage et commercialisation de parcelles à moins de 100 km d'Abidjan.</p>
+    </div>
+  </div>
+  <div class="slide" style="background-image:url('fond5.jpg');">
+    <div class="slide-content">
+      <h2>Notre Engagement</h2>
+      <p>Offrir des lots viabilisés, accessibles, dans un cadre légal sécurisé pour des logements de qualité.</p>
+    </div>
+  </div>
 
-  <script>
-    // Quick search placeholder
-    function quickSearch(e){
-      e.preventDefault();
-      const f = new FormData(e.target);
-      alert(`Recherche: ${f.get('type')} à ${f.get('ville')} — budget ${f.get('min')||'N/A'}-${f.get('max')||'N/A'} FCFA`);
-    }
+  <button class="slider-btn prev">&#10094;</button>
+  <button class="slider-btn next">&#10095;</button>
+</div>
 
-    // Simple local CRM (leads saved in localStorage)
-    function getLeads(){
-      return JSON.parse(localStorage.getItem('odomiga yé')||'[]');
-    }
-    function saveLeads(list){
-      localStorage.setItem('odomiga yé', JSON.stringify(list));
-      renderLeads();
-    }
-    function saveLead(e){
-      e.preventDefault();
-      const f = new FormData(e.target);
-      const lead = {id:Date.now(),nom:f.get('nom'),tel:f.get('tel'),email:f.get('email')||'',service:f.get('service'),note:f.get('note'),status:'Nouveau'};
-      const list = getLeads(); list.unshift(lead); saveLeads(list);
-      e.target.reset();
-    }
-    function renderLeads(){
-      const list = getLeads();
-      const out = document.getElementById('leadsList');
-      if(!out) return;
-      out.innerHTML = list.length? list.map(l=>`<div class="card" style="padding:10px;margin-bottom:8px"><b>${l.nom}</b> — ${l.tel}<br><small>${l.service} • ${l.status}</small><div style="margin-top:8px"><button onclick="callLead(${l.id})">Appeler</button> <button onclick="editNote(${l.id})">Note</button> <button onclick="deleteLead(${l.id})">Supprimer</button></div></div>`).join('') : '<p style="color:var(--muted)">Aucun lead enregistré.</p>';
-    }
-    function callLead(id){
-      const lead = getLeads().find(l=>l.id===id);
-      if(!lead) return; window.location.href = `tel:${lead.tel}`;
-    }
-    function editNote(id){
-      const list = getLeads(); const idx=list.findIndex(l=>l.id===id); if(idx===-1) return;
-      const val = prompt('Note/Message pour ce lead', list[idx].note||''); if(val===null) return; list[idx].note = val; saveLeads(list);
-    }
-    function deleteLead(id){
-      if(!confirm('Supprimer ce lead ?')) return; const list = getLeads().filter(l=>l.id!==id); saveLeads(list);
-    }
-    function exportLeads(){
-      const list = getLeads(); if(!list.length){alert('Aucun lead à exporter'); return}
-      const csv = ['id,nom,tel,email,service,note,status'].concat(list.map(l=>`${l.id},"${(l.nom||'').replace(/"/g,'""')}",${l.tel},${l.email},${l.service},"${(l.note||'').replace(/"/g,'""')}",${l.status}`)).join('\n');
-      const blob = new Blob([csv],{type:'text/csv'}); const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='kaseb_leads.csv'; a.click(); URL.revokeObjectURL(url);
-    }
-    function clearLeads(){ if(confirm('Effacer tous les leads locaux ?')){localStorage.removeItem('odomiga yé'); renderLeads();} }
-    // Contact form -> WhatsApp
-    function contactSend(e){
-      e.preventDefault(); const f = new FormData(e.target); const txt = `Bonjour je suis  ${f.get('name')}.\nTel: ${f.get('phone')}\nMessage: ${f.get('message')}`; const url = `https://wa.me/2250747013706?text=${encodeURIComponent(txt)}`; window.open(url,'_blank'); e.target.reset();
-    }
-    // initialize
-    renderLeads();
-  </script>
+<footer>
+  &copy; 2025 OdomigaYé Immobilier. Tous droits réservés.<br>
+  <a href="privacy.html">Politique de confidentialité</a> • <a href="contact.html">Contact</a>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const slides = document.querySelectorAll('.slide');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
+  let current = 0;
+  const total = slides.length;
+
+  function showSlide(index){
+    slides.forEach((slide,i) => slide.classList.toggle('active', i===index));
+  }
+  function nextSlide(){ current = (current+1)%total; showSlide(current); }
+  function prevSlide(){ current = (current-1+total)%total; showSlide(current); }
+
+  nextBtn.addEventListener('click', nextSlide);
+  prevBtn.addEventListener('click', prevSlide);
+  setInterval(nextSlide, 7000);
+});
+</script>
 </body>
 </html>
